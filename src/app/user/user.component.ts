@@ -18,7 +18,8 @@ export class UserComponent {
     return 'assets/users/' + this.selectedUser.avatar;
   }
 
-  onSelectUser() {
-    console.log("Click!");
+  onChangeUser() {
+  const newIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+    this.selectedUser = DUMMY_USERS[newIndex];
   }
 }
