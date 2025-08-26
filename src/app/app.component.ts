@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DUMMY_USERS } from './dummy-users';
 import { HeaderComponent } from './header/header.component';
-import { TasksComponent } from './task/tasks.component';
+import { TasksComponent } from './tasks/tasks.component';
 import { UserComponent } from './user/user.component';
 
 @Component({
@@ -13,13 +13,14 @@ import { UserComponent } from './user/user.component';
 })
 export class AppComponent {
   users = DUMMY_USERS;
-  selectedUser: string = '';
+  selectedUserId: string = 'u1';
 
-  // get selectedUser() {
-  //   return this.users.find((user) => user.id == this.selectedUserId)!;
-  // }
+  get selectedUser() {
+    console.log(this.users.find((user) => user.id === this.selectedUserId));
+    return this.users.find((user) => user.id === this.selectedUserId);
+  }
 
-  onSelectUser(name: string) {
-    this.selectedUser = name;
+  onSelectUser(id: string) {
+    this.selectedUserId = id;
   }
 }
