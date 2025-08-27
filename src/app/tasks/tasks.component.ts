@@ -1,19 +1,20 @@
 import { Component, Input } from '@angular/core';
+import { NewTaskComponent } from "./new-task/new-task.component";
 import { TaskComponent } from './task/task.component';
 import { TasksProps } from './task/task.model';
 
-
-  let contador = 0;
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [TaskComponent],
+  imports: [TaskComponent, NewTaskComponent],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
 export class TasksComponent {
   @Input({ required: true }) userId!: string;
   @Input({ required: true }) name?: string;
+
+  isAddingTask: boolean = false;
 
   tasks: TasksProps[] = [
     {
@@ -47,15 +48,11 @@ export class TasksComponent {
     this.tasks = this.tasks.filter((task) => task.id !== id);
   }
 
-  onAddTask() {
-    let i: string = (this.tasks.length + 1).toString();
-    contador = ++contador;
-    this.tasks.push({
-      id: 'u' + i,
-      userId: this.userId,
-      title: 'New Task' + contador,
-      summary: 'Description of the new task.' + contador,
-      dueDate: '2025-12-31'
-    });
+  onStartAddTask() {
+    this.isAddingTask = true;
+  }
+
+  onCancelAddTask() {
+    this.isAddingTask = false;
   }
 }
