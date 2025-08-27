@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { TasksProps } from './task/task.model';
 
+
+  let contador = 0;
 @Component({
   selector: 'app-tasks',
   standalone: true,
@@ -43,5 +45,17 @@ export class TasksComponent {
 
   onCompleteTask(id: string) {
     this.tasks = this.tasks.filter((task) => task.id !== id);
+  }
+
+  onAddTask() {
+    let i: string = (this.tasks.length + 1).toString();
+    contador = ++contador;
+    this.tasks.push({
+      id: 'u' + i,
+      userId: this.userId,
+      title: 'New Task' + contador,
+      summary: 'Description of the new task.' + contador,
+      dueDate: '2025-12-31'
+    });
   }
 }
